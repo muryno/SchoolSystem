@@ -125,6 +125,10 @@
                         <viewLayoutGuide key="safeArea" id="eka-8v-E4q"/>
                     </view>
                     <navigationItem key="navigationItem" id="HkG-kk-3gg"/>
+                    <connections>
+                        <outlet property="email_l" destination="bDj-LZ-ERG" id="3uq-rJ-yLL"/>
+                        <outlet property="psswrd" destination="Ssg-oD-iLg" id="zi6-ir-Dt2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icm-jS-wtS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -311,7 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ie6-KJ-4ww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3220" y="-320"/>
+            <point key="canvasLocation" x="-2080" y="-253"/>
         </scene>
     </scenes>
     <resources>

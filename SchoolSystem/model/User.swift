@@ -9,26 +9,45 @@
 import Foundation
 
 
-struct User : Codable{
-    var id  : Int
-    var status : Int?
-    var first_name : String?
-     var email : String?
-     var age : String?
-     var last_name : String?
-    var phone : String?
+
+struct  UserBase : Codable{
     
-    var department_id : Int?
+    var message : String?
+    var status : Bool?
+    //   var data : [User]
     
-    var appKey : String?
-    
-    var matric_number :String?
-    
-    var department : Department?
     
     enum CodingKeys: String, CodingKey {
-        case id, status , email, age, last_name ,phone,department_id, appKey ,matric_number , department,
-          first_name  = "first_name"
+          case status,
+          //  data  = "data",
+            message = "message"
+        
+         
+      }
+}
+struct User : Codable{
+    var id  : Int?
+    var status : String?
+    var fname : String?
+     var email : String?
+     var age : String?
+
+    var phone : String?
+    var lname : String?
+
+
+    var matric : String?
+    var appKey: String?
+    var image : String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id   ,appKey, status,age,
+        image = "profile_image",
+          fname  = "first_name",
+        phone = "phone",
+        email = "email",
+        matric = "matric_number",
+        lname = "last_name"
     }
 
 }

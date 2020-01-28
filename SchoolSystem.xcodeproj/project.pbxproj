@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0409C9D223DF926E0066C7FC /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409C9D123DF926E0066C7FC /* BaseData.swift */; };
 		047123B123D9CCC200521EB5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047123B023D9CCC200521EB5 /* LoginViewController.swift */; };
 		047123B323D9D03E00521EB5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047123B223D9D03E00521EB5 /* MainViewController.swift */; };
 		047123B523D9D21700521EB5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047123B423D9D21700521EB5 /* SignUpViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0409C9D123DF926E0066C7FC /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		047123B023D9CCC200521EB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		047123B223D9D03E00521EB5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		047123B423D9D21700521EB5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				047123B723D9ED7F00521EB5 /* User.swift */,
+				0409C9D123DF926E0066C7FC /* BaseData.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				047123B823D9ED8000521EB5 /* User.swift in Sources */,
 				049FA72C23D9A82C00DBE491 /* SceneDelegate.swift in Sources */,
 				047123B323D9D03E00521EB5 /* MainViewController.swift in Sources */,
+				0409C9D223DF926E0066C7FC /* BaseData.swift in Sources */,
 				047123B523D9D21700521EB5 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

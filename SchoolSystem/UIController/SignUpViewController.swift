@@ -27,12 +27,46 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func sign_up(_ sender: TransitionButton) {
-        let parameter = ["first_name":f_name.text,"email":email.text,
-                         "Phone":phone.text,"age":age.text,
-                    "Password":passwrdd.text,"last_name":l_name.text,
-                      "department_id":departmnt.text
-        ]
+    @IBAction func sign_up(_ button: TransitionButton) {
+      
+        button.startAnimation() // 2: Then start the animation when the user tap the button
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+
+
+            
+            let queryItems = [
+                       "department_id": self.departmnt.text,
+                       "first_name": self.f_name.text,
+                       "last_name": self.l_name.text,
+                       "age": self.age.text,
+                       "email": self.email.text,
+                       "phone": self.phone.text,
+                       "password": self.passwrdd.text,
+                   ]
+            
+           DataService.shared.CreateUserAccount(parameters: queryItems as! [String : String]) { (result) in
+ 
+            DispatchQueue.main.async(execute: { () -> Void in
+          
+                switch result{
+                    case .failure(let error):
+                        button.stopAnimation()
+                     print("Created Succefully\(error)")
+                    case .success( let successfful):
+                        print("Created Succefully\(successfful)")
+                         button.stopAnimation()
+                    }
+              
+//                button.stopAnimation(animationStyle: .expand, completion: {
+//                    let secondVC = MainViewController()
+//                    self.present(secondVC, animated: true, completion: nil)
+//                })
+            })
+        }
+        })
+
         
         
     }
