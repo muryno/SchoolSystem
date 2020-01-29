@@ -29,42 +29,44 @@ class SignUpViewController: UIViewController {
     
     @IBAction func sign_up(_ button: TransitionButton) {
       
+            let queryItems = [
+                       "department_id": self.departmnt.text ?? "",
+                       "first_name": self.f_name.text ?? "",
+                       "last_name": self.l_name.text ?? "",
+                       "age": self.age.text ?? "",
+                       "email": self.email.text ?? "",
+                       "phone": self.phone.text ?? "",
+                       "password": self.passwrdd.text ?? "",
+                   ]
         button.startAnimation() // 2: Then start the animation when the user tap the button
         let qualityOfServiceClass = DispatchQoS.QoSClass.background
         let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
         backgroundQueue.async(execute: {
 
 
+      
+
+
+            let url = "http://192.168.1.23:5000/api/student/register"
+
+                   let req:Request = Request()
+            req.getResponse(url: url, parameters: queryItems as [String : Any], httpMethod: .post) {(result: Results<UserBase>) in
+
+                DispatchQueue.main.async(execute: { () -> Void in
+
+                    switch result{
+                        case .failure(let error):
+                            button.stopAnimation()
+                         print("Error\(error)")
+                        case .success( let successfful):
+                            print("Created Succefully\(successfful)")
+                             button.stopAnimation()
+                        }
+
+
+                })
+            }
             
-            let queryItems = [
-                       "department_id": self.departmnt.text,
-                       "first_name": self.f_name.text,
-                       "last_name": self.l_name.text,
-                       "age": self.age.text,
-                       "email": self.email.text,
-                       "phone": self.phone.text,
-                       "password": self.passwrdd.text,
-                   ]
-            
-           DataService.shared.CreateUserAccount(parameters: queryItems as! [String : String]) { (result) in
- 
-            DispatchQueue.main.async(execute: { () -> Void in
-          
-                switch result{
-                    case .failure(let error):
-                        button.stopAnimation()
-                     print("Created Succefully\(error)")
-                    case .success( let successfful):
-                        print("Created Succefully\(successfful)")
-                         button.stopAnimation()
-                    }
-              
-//                button.stopAnimation(animationStyle: .expand, completion: {
-//                    let secondVC = MainViewController()
-//                    self.present(secondVC, animated: true, completion: nil)
-//                })
-            })
-        }
         })
 
         

@@ -53,9 +53,7 @@ class LoginViewController: UIViewController {
             "email": self.email_l.text ??  "",
             "password": self.psswrd.text ??  ""
         ]
-        
-        print(queryItems)
-
+ 
         button.cornerRadius = 5
         
       button.startAnimation() // 2: Then start the animation when the user tap the button
@@ -68,33 +66,24 @@ class LoginViewController: UIViewController {
                     let url = "http://192.168.1.23:5000/api/student/login"
 
                            let req:Request = Request()
-                    req.getResponse(url: url, parameters: queryItems as [String : Any], httpMethod: .post, completionHandler: {data,response,error in
-                               print(response)
-                                
-                        print(data!)
+                    req.getResponse(url: url, parameters: queryItems as [String : Any], httpMethod: .post) {(result: Results<UserBase>) in
 
-                        button.stopAnimation()
-                           })
+                        DispatchQueue.main.async(execute: { () -> Void in
+
+                            switch result{
+                                case .failure(let error):
+                                    button.stopAnimation()
+                                 print("Error\(error)")
+                                case .success( let successfful):
+                                    print("Created Succefully\(successfful)")
+                                     button.stopAnimation()
+                                }
+
+
+                        })
+                    }
+
                     
-                 
-//                    DataService.shared.Login(parameters: queryItems as! [String : Any]) { (result) in
-//
-//                                          DispatchQueue.main.async(execute: { () -> Void in
-//
-//                                              switch result{
-//                                                  case .failure(let error):
-//                                                      button.stopAnimation()
-//                                                   print("Error\(error)")
-//                                                  case .success( let successfful):
-//                                                      print("Created Succefully\(successfful)")
-//                                                       button.stopAnimation()
-//                                                  }
-//
-//
-//                                          })
-//
-//                    }
-  
                     
                 })
 

@@ -48,3 +48,10 @@ extension Dictionary {
         return parameterArray.joined(separator: "&")
     }
 }
+
+enum Results<T> {
+    case success(T)
+    case failure(Error)
+
+}
+

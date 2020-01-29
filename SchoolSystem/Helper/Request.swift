@@ -13,7 +13,7 @@ import UIKit
 class Request {
     let get = "GET"
     let post = "POST"
-    func getResponse(url:String,parameters:[String:Any],httpMethod:HTTPMethod,completionHandler: @escaping (Data?, [String:Any], Error?) -> Void) {
+    func getResponse<T>(url:String,parameters:[String:Any],httpMethod:HTTPMethod,completionHandler:  @escaping (Results<T>) -> Void) where T : Codable  {
         if let url = URL(string: url) {
             var request = URLRequest(url: url)
             
@@ -35,25 +35,32 @@ class Request {
             }
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
-                    // check for fundamental networking error
-                    print("error", error ?? "Unknown error")
-                    completionHandler(Data(),[:],error)
-                    return
-                }
+             guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
+              
+                print("error", error ?? "Unknown error")
+                  completionHandler(.failure(error!) )
+                return
+               }
+                               
+          guard (200 ... 299) ~= response.statusCode else {
+                // check for http errors
+               print("statusCode should be 2xx, but is \(response.statusCode)")
+            print("response = \(response)")
+                  return
+       }
+                   do{
+                    let data = try JSONDecoder().decode(T.self, from: data)
                 
-                guard (200 ... 299) ~= response.statusCode else {
-                    // check for http errors
-                    print("statusCode should be 2xx, but is \(response.statusCode)")
-                    print("response = \(response)")
-                    completionHandler(data,[:],error)
-                    return
+                    print(data) //whole project
+                  
+                    completionHandler(.success(data) )
+                     
+                   }catch let serializationError{
+                   
+                    completionHandler(.failure(serializationError) )
                 }
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                if let dictinary = responseJSON as? [String: Any] {
-                    completionHandler(data,dictinary,error)
-                }
-                completionHandler(data,[:],error)
+                                              
+                               
             }
             task.resume()
         }
@@ -64,7 +71,7 @@ class Request {
     deinit {
         print("deinit \(#function)")
     }
-    func POST(url:String,parameters:[String:Any],completionHandler: @escaping (Data?, [String:Any], Error?) -> Void) {
+    func POST<T>(url:String,parameters:[String:Any],completionHandler: @escaping (Results<T>) -> Void) where T : Codable {
         if let url = URL(string: url) {
             var request = URLRequest(url: url)
             request.httpMethod = post
@@ -76,21 +83,32 @@ class Request {
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
                     print("error", error ?? "Unknown error")
-                    completionHandler(Data(),[:],error)
+                    completionHandler(.failure(error!) )
                     return
                 }
+                
                 guard (200 ... 299) ~= response.statusCode else {
                     // check for http errors
                     print("statusCode should be 2xx, but is \(response.statusCode)")
                     print("response = \(response)")
-                    completionHandler(data,[:],error)
+                   // completionHandler(.status())
                     return
                 }
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                if let dictinary = responseJSON as? [String: Any] {
-                    completionHandler(data,dictinary,error)
+                do{
+                    let data = try JSONDecoder().decode(T.self, from: data)
+                                   
+                    print(data) //whole project
+                                
+                  completionHandler(.success(data) )
+                                   
+                   }catch let serializationError{
+                                   
+                    completionHandler(.failure(serializationError) )
                 }
-                completionHandler(data,[:],error)
+                               
+                
+            
+                
             }
             task.resume()
         }

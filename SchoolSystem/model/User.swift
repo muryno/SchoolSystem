@@ -12,14 +12,14 @@ import Foundation
 
 struct  UserBase : Codable{
     
-    var message : String?
-    var error : Bool?
-    //   var data : [User]
+    var message : String
+    var status : Bool
+       var data : User?
     
     
     enum CodingKeys: String, CodingKey {
-          case error,
-          //  data  = "data",
+          case status,
+            data  = "data",
             message = "message"
         
          
@@ -27,7 +27,7 @@ struct  UserBase : Codable{
 }
 struct User : Codable{
     var id  : Int?
-    var status : String?
+    var status : Int?
     var fname : String?
      var email : String?
      var age : String?
