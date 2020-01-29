@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0409C9D223DF926E0066C7FC /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409C9D123DF926E0066C7FC /* BaseData.swift */; };
+		0417C07C23E13B3D0042ADFD /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417C07B23E13B3D0042ADFD /* Request.swift */; };
+		0417C07E23E13B640042ADFD /* BMExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417C07D23E13B640042ADFD /* BMExtention.swift */; };
+		0417C08023E13B760042ADFD /* BMHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417C07F23E13B760042ADFD /* BMHelper.swift */; };
 		047123B123D9CCC200521EB5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047123B023D9CCC200521EB5 /* LoginViewController.swift */; };
 		047123B323D9D03E00521EB5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047123B223D9D03E00521EB5 /* MainViewController.swift */; };
 		047123B523D9D21700521EB5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047123B423D9D21700521EB5 /* SignUpViewController.swift */; };
@@ -23,6 +26,9 @@
 
 /* Begin PBXFileReference section */
 		0409C9D123DF926E0066C7FC /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
+		0417C07B23E13B3D0042ADFD /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		0417C07D23E13B640042ADFD /* BMExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMExtention.swift; sourceTree = "<group>"; };
+		0417C07F23E13B760042ADFD /* BMHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMHelper.swift; sourceTree = "<group>"; };
 		047123B023D9CCC200521EB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		047123B223D9D03E00521EB5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		047123B423D9D21700521EB5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +58,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0417C07A23E13B190042ADFD /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0417C07B23E13B3D0042ADFD /* Request.swift */,
+				0417C07D23E13B640042ADFD /* BMExtention.swift */,
+				0417C07F23E13B760042ADFD /* BMHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		047123AB23D9C2B400521EB5 /* UIController */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +116,7 @@
 		049FA72823D9A82C00DBE491 /* SchoolSystem */ = {
 			isa = PBXGroup;
 			children = (
+				0417C07A23E13B190042ADFD /* Helper */,
 				047123B923D9FBD100521EB5 /* service */,
 				047123B623D9ED6800521EB5 /* model */,
 				047123AB23D9C2B400521EB5 /* UIController */,
@@ -246,12 +263,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				047123BB23D9FD4200521EB5 /* DataSource.swift in Sources */,
+				0417C07E23E13B640042ADFD /* BMExtention.swift in Sources */,
 				047123B123D9CCC200521EB5 /* LoginViewController.swift in Sources */,
 				049FA72A23D9A82C00DBE491 /* AppDelegate.swift in Sources */,
 				047123B823D9ED8000521EB5 /* User.swift in Sources */,
 				049FA72C23D9A82C00DBE491 /* SceneDelegate.swift in Sources */,
 				047123B323D9D03E00521EB5 /* MainViewController.swift in Sources */,
+				0417C08023E13B760042ADFD /* BMHelper.swift in Sources */,
 				0409C9D223DF926E0066C7FC /* BaseData.swift in Sources */,
+				0417C07C23E13B3D0042ADFD /* Request.swift in Sources */,
 				047123B523D9D21700521EB5 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

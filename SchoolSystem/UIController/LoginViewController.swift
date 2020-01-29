@@ -46,15 +46,16 @@ class LoginViewController: UIViewController {
     @IBAction func btnAction(_ button
         : TransitionButton) {
         
-        print("params\( self.psswrd.text ??  "nothing")")
       
         
         
         let queryItems = [
-            "email": self.email_l.text,
-            "password": self.psswrd.text
+            "email": self.email_l.text ??  "",
+            "password": self.psswrd.text ??  ""
         ]
         
+        print(queryItems)
+
         button.cornerRadius = 5
         
       button.startAnimation() // 2: Then start the animation when the user tap the button
@@ -64,24 +65,35 @@ class LoginViewController: UIViewController {
 
                      // 3: Do your networking task or background work here.
 
+                    let url = "http://192.168.1.23:5000/api/student/login"
+
+                           let req:Request = Request()
+                    req.getResponse(url: url, parameters: queryItems as [String : Any], httpMethod: .post, completionHandler: {data,response,error in
+                               print(response)
+                                
+                        print(data!)
+
+                        button.stopAnimation()
+                           })
+                    
                  
-                    DataService.shared.Login(parameters: queryItems as! [String : String]) { (result) in
-                        
-                                          DispatchQueue.main.async(execute: { () -> Void in
-                                        
-                                              switch result{
-                                                  case .failure(let error):
-                                                      button.stopAnimation()
-                                                   print("Error\(error)")
-                                                  case .success( let successfful):
-                                                      print("Created Succefully\(successfful)")
-                                                       button.stopAnimation()
-                                                  }
-                                            
-                        
-                                          })
-                        
-                    }
+//                    DataService.shared.Login(parameters: queryItems as! [String : Any]) { (result) in
+//
+//                                          DispatchQueue.main.async(execute: { () -> Void in
+//
+//                                              switch result{
+//                                                  case .failure(let error):
+//                                                      button.stopAnimation()
+//                                                   print("Error\(error)")
+//                                                  case .success( let successfful):
+//                                                      print("Created Succefully\(successfful)")
+//                                                       button.stopAnimation()
+//                                                  }
+//
+//
+//                                          })
+//
+//                    }
   
                     
                 })

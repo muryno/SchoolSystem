@@ -14,7 +14,7 @@ class DataService {
       static let shared = DataService()
 
     //create user account
-    func CreateUserAccount(parameters: [String : String],completion :@escaping(Result<UserBase,Error>)->Void) {
+    func CreateUserAccount(parameters: [String : Any],completion :@escaping(Result<UserBase,Error>)->Void) {
     
         let validUrl = URL(string: "http://192.168.1.18:5000/api/student/register")!
         print("\(validUrl)")
@@ -47,9 +47,9 @@ class DataService {
     }
     
     
-    func Login(parameters: [String:String],completion:@escaping(Result<UserBase,Error>)->Void)  {
+    func Login<T>(parameters: [String:Any] ,completion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
        
-        let validUrl = URL(string: "http://192.168.1.23:5000/api/student/login")!
+        let validUrl = URL(string: "https://api.connectrail.net/user/login")!
         
         
         let postRequest = getRequestPostBody(validUrl: validUrl,parameters: parameters)
@@ -71,11 +71,10 @@ class DataService {
                 
                 do{
                     
-                    let data = try JSONDecoder().decode(UserBase.self, from: datas)
+                    let data = try JSONDecoder().decode(T.self, from: datas)
                     
                     print(data) //whole project
-                     print(data.status) //200.0
-                    print(data.message)
+                 
                     completion(.success(data))
                     
                 }catch let serializationError{
@@ -131,7 +130,7 @@ class DataService {
 
 
 //url request
-func getRequestPostBody(validUrl : URL ,parameters : [String:String])->NSMutableURLRequest{
+func getRequestPostBody(validUrl : URL ,parameters : [String:Any])->NSMutableURLRequest{
  
    
     let request = NSMutableURLRequest(url: validUrl)
@@ -142,6 +141,7 @@ func getRequestPostBody(validUrl : URL ,parameters : [String:String])->NSMutable
 
     request.httpMethod = "POST"
     request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     request.addValue("application/json", forHTTPHeaderField: "Accept")
     request.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
