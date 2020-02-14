@@ -60,8 +60,14 @@ class SignUpViewController: UIViewController {
                          print("Error\(error)")
                         case .success( let successfful):
                             print("Created Succefully\(successfful)")
+                            
+                            self.performSegue(withIdentifier: "homeviewsegue", sender: self)
+
+                            UserDefaults.standard.set(true, forKey: "login")
+                            UserDefaults.standard.synchronize()
                              button.stopAnimation()
                         }
+                    
 
 
                 })

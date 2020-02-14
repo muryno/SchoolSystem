@@ -41,53 +41,71 @@ class LoginViewController: UIViewController {
 //                                }
 //            }
 //    }
+        if (UserDefaults.standard.isLoggedIn()){
+            self.performSegue(withIdentifier: "homeviewsegue", sender: self)
+
+        }
     
     }
     @IBAction func btnAction(_ button
         : TransitionButton) {
         
-      
+      self.performSegue(withIdentifier: "homeviewsegue", sender: self)
+
+         UserDefaults.standard.setLoggedIn(value: true)
+
+//
+//
+//        let queryItems = [
+//            "email": self.email_l.text ??  "",
+//            "password": self.psswrd.text ??  ""
+//        ]
+//
+//        button.cornerRadius = 5
+//
+//      button.startAnimation() // 2: Then start the animation when the user tap the button
+//                let qualityOfServiceClass = DispatchQoS.QoSClass.background
+//                let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+//                backgroundQueue.async(execute: {
+//
+//                     // 3: Do your networking task or background work here.
+//
+//                    let url = "http://192.168.1.23:5000/api/student/login"
+//
+//                           let req:Request = Request()
+//                    req.getResponse(url: url, parameters: queryItems as [String : Any], httpMethod: .post) {(result: Results<UserBase>) in
+//
+//                        DispatchQueue.main.async(execute: { () -> Void in
+//
+//                            switch result{
+//                                case .failure(let error):
+//                                    button.stopAnimation()
+//                                 print("Error\(error)")
+//                                case .success( let successfful):
+//                                    print("Created Succefully\(successfful)")
+//
+//
+//                                    UserDefaults.standard.setLoggedIn(value: true)
+//
+//                                    button.stopAnimation()
+//                                }
+//
+//
+//                        })
+//                    }
+//
+//
+//
+//                })
+//
+//
         
-        
-        let queryItems = [
-            "email": self.email_l.text ??  "",
-            "password": self.psswrd.text ??  ""
-        ]
- 
-        button.cornerRadius = 5
-        
-      button.startAnimation() // 2: Then start the animation when the user tap the button
-                let qualityOfServiceClass = DispatchQoS.QoSClass.background
-                let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-                backgroundQueue.async(execute: {
-
-                     // 3: Do your networking task or background work here.
-
-                    let url = "http://192.168.1.23:5000/api/student/login"
-
-                           let req:Request = Request()
-                    req.getResponse(url: url, parameters: queryItems as [String : Any], httpMethod: .post) {(result: Results<UserBase>) in
-
-                        DispatchQueue.main.async(execute: { () -> Void in
-
-                            switch result{
-                                case .failure(let error):
-                                    button.stopAnimation()
-                                 print("Error\(error)")
-                                case .success( let successfful):
-                                    print("Created Succefully\(successfful)")
-                                     button.stopAnimation()
-                                }
-
-
-                        })
-                    }
-
-                    
-                    
-                })
-
     }
+    
+    
+
+    
+    
     
     
 }
