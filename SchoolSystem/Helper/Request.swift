@@ -14,7 +14,9 @@ class Request {
     let get = "GET"
     let post = "POST"
     func getResponse<T>(url:String,parameters:[String:Any],httpMethod:HTTPMethod,completionHandler:  @escaping (Results<T>) -> Void) where T : Codable  {
-        if let url = URL(string: url) {
+        
+        
+        if let url = URL(string: BaseUrl(url: url)) {
             var request = URLRequest(url: url)
             
             //SET REQUEST FOR GET
@@ -72,7 +74,7 @@ class Request {
         print("deinit \(#function)")
     }
     func POST<T>(url:String,parameters:[String:Any],completionHandler: @escaping (Results<T>) -> Void) where T : Codable {
-        if let url = URL(string: url) {
+        if let url = URL(string: BaseUrl(url: url)) {
             var request = URLRequest(url: url)
             request.httpMethod = post
             let header = Request.getMultipartCommonHeader()
@@ -152,4 +154,10 @@ class Request {
         body.append(str.data(using: String.Encoding.utf8)!)
         return body
     }
+}
+
+
+func BaseUrl( url: String)->String{
+    let er = "https://api.connectrail.net/"+url
+    return er
 }

@@ -36,9 +36,8 @@ class SignUpViewController: UIViewController {
                        "age": self.age.text ?? "",
                        "email": self.email.text ?? "",
                        "phone": self.phone.text ?? "",
-                       "password": self.passwrdd.text ?? "",
-                   ]
-        button.startAnimation() // 2: Then start the animation when the user tap the button
+                       "password": self.passwrdd.text ?? ""]
+       // button.startAnimation() // 2: Then start the animation when the user tap the button
         let qualityOfServiceClass = DispatchQoS.QoSClass.background
         let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
         backgroundQueue.async(execute: {
@@ -56,7 +55,7 @@ class SignUpViewController: UIViewController {
 
                     switch result{
                         case .failure(let error):
-                            button.stopAnimation()
+                          //  button.stopAnimation()
                          print("Error\(error)")
                         case .success( let successfful):
                             print("Created Succefully\(successfful)")
@@ -65,7 +64,7 @@ class SignUpViewController: UIViewController {
 
                             UserDefaults.standard.set(true, forKey: "login")
                             UserDefaults.standard.synchronize()
-                             button.stopAnimation()
+                           // button.stopAnimation()
                         }
                     
 
@@ -79,14 +78,5 @@ class SignUpViewController: UIViewController {
         
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -10,43 +10,43 @@ import Foundation
 
 
 
-struct  UserBase : Codable{
+struct  UserBase : Codable {
     
     var message : String
-    var status : Bool
+    var error : Bool
        var data : User?
     
     
     enum CodingKeys: String, CodingKey {
-          case status,
-            data  = "data",
-            message = "message"
+          case error, data ,
+            message
         
          
       }
 }
 struct User : Codable{
-    var id  : Int?
-    var status : Int?
+    var id  : String?
+    var staff_id : String?
     var fname : String?
-     var email : String?
-     var age : String?
+     var mobile : String?
 
-    var phone : String?
     var lname : String?
 
 
-    var matric : String?
-    var appKey: String?
+    var oname : String?
     var image : String?
     
+    var personal_email : String?
+     var gender: String?
+     var designation : String?
+    var address : String?
+    var email : String?
+    var authorization : String?
+    
     enum CodingKeys: String, CodingKey {
-        case id   ,appKey, status,age,
+        case id   , staff_id,mobile,oname,personal_email,gender,designation,address,email,authorization,
         image = "profile_image",
           fname  = "first_name",
-        phone = "phone",
-        email = "email",
-        matric = "matric_number",
         lname = "last_name"
     }
 
@@ -56,12 +56,4 @@ struct User : Codable{
 
 
 
-struct Department :Codable{
-    var id  : Int?
-
-    var department_name : String?
-   var department_code : String?
-   var faculty_id : String?
-
-}
 
